@@ -1,0 +1,27 @@
+<ng-container *ngIf="true">
+  <mat-toolbar>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>TodoList</span>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" class="example-sidenav"
+                 [fixedInViewport]="false" [fixedTopGap]="0"
+                 [fixedBottomGap]="0">
+      <mat-list>
+        <mat-list-item *ngFor="let todoList of todoLists"><button mat-raised-button class="todo-list" color="primary" (click)="sideClick(todoList)">{{ todoList.title }}</button></mat-list-item>
+        <mat-list-item><button mat-raised-button color="accent" class="todo-list" (click)="newTodoListDialog()">+</button></mat-list-item>
+      </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="todo-list-content">
+      <h1>{{ selectedTodoList ? selectedTodoList.title.toUpperCase() : "Select one todo-list" }}</h1>
+      <mat-list role="list">
+        <mat-list-item role="listitem" *ngFor="let todo of todos"><todo-render [todo]="todo"></todo-render></mat-list-item>
+        <mat-list-item *ngIf="selectedTodoList"><button mat-raised-button color="accent" class="todo-list" (click)="newTodoDialog()">+</button></mat-list-item>
+      </mat-list>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>
